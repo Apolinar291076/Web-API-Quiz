@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!--Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <title>Coding Quiz Challenge!</title>
+
+  </head>
+  <body>
+    <header id="header-main">
+      <div id="idHighScore">
+        <p>View Highscores</p>
+      </div>
+      <div id="idTime">
+        <p>Time: <span id="timeElapsed">0</span></p>
+      </div>
+    </header>
+
+    <main id="mainTxt">
+      <div class="main-content-div1">
+        <h1 class="main-content-h1">Coding Quiz Challenge</h1>
+      </div>
+      <div id="main-content-div2a">
+        <p>Your final score is: <span id="final-score"></span></p>
+      </div>
+      <div id="main-content-div2b">
+        <form id = "myForm">
+          Enter Initials: <input type="text" id="initials-enter" name="iniName">
+          <input type="button" id="btn-submit" value="Submit">
+        </form>
+      </div>
+      <div id="main-content-div2">
+        <p id="storage-view">
+          Try to answer the following code-related questions within the time
+          limit. Keep in mind that incorrect answers will penalize your score/time 
+          by ten seconds.
+        </p>
+      </div>
+      <div id="main-content-reset">
+        <input type="button" id="btn-go-back" value="Go Back">
+        <input type="button" id="btn-clear-score" value="Clear Scores">
+      </div>
+      <div id="main-content-div3a">
+        <button type="button" id="btn-prop">Start Quiz</button>
+      </div>
+      <div id="main-content-div3">
+        <button type="button" class="choice" id="btn1-div3" onclick="checkAnswer(1)">Choice1</button><br/>
+        <button type="button" class="choice" id="btn2-div3" onclick="checkAnswer(2)">Choice2</button><br/>
+        <button type="button" class="choice" id="btn3-div3" onclick="checkAnswer(3)">Choice3</button><br/>
+        <button type="button" class="choice" id="btn4-div3" onclick="checkAnswer(4)">Choice4</button>
+        <!--buttons to be added here dynamically-->
+      </div>
+      <div id="main-content-div4">
+        <p id="main-div4-result">Answer</p>
+      </div>
+    </main>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+    <script>
+
+      var mainTxt = document.getElementById("mainTxt");
+      var mainContentDiv2 = document.getElementById("main-content-div2");
+      var mainContentDiv2a = document.getElementById("main-content-div2a");
+      var mainContentDiv2b = document.getElementById("main-content-div2b");
+      var mainContentDiv3 = document.getElementById("main-content-div3");
+      var mainContentDiv3a = document.getElementById("main-content-div3a");
+      var mainContentDiv4 = document.getElementById("main-content-div4");
+      var startQuizButton = document.querySelector("#btn-prop");
+      var mainH1 = document.querySelector(".main-content-h1");
+      var mainDiv4Result = document.getElementById("main-div4-result");
+      var btn1Div3 = document.getElementById("btn1-div3");
+      var btn2Div3 = document.getElementById("btn2-div3");
+      var btn3Div3 = document.getElementById("btn3-div3");
+      var btn4Div3 = document.getElementById("btn4-div3");
+      var timeElapsed = document.getElementById("timeElapsed");
+      var finalScore = document.getElementById("final-score");
+      var buttonSubmit = document.getElementById("btn-submit");
+      var initialsEnter = document.getElementById("initials-enter");
+      var storageView = document.getElementById("storage-view");
+      var mainContentReset = document.getElementById("main-content-reset");
+      var buttonGoBack = document.getElementById("btn-go-back");
+      var buttonClearScore = document.getElementById("btn-clear-score");
+      var arrQuestions = [{
+                          question: "Commonly used data types DO NOT include:",
+                          option1 : "1. Strings",
+                          option2 : "2. Booleans",
+                          option3 : "3. Alerts",
+                          option4 : "4. Numbers",
+                          ans : 3
+                          },
+                          {
+                          question: "The condition in an if/else statement is enclosed within:",
+                          option1 : "1. quotes",
+                          option2 : "2. curly brackets",
+                          option3 : "3. parentheses",
+                          option4 : "4. square brackets",
+                          ans : 3
+                          },
+                          {
+                          question: "A very useful tool used during development and debugging for printing content to the debugger is:",
+                          option1 : "1. JavaScript",
+                          option2 : "2. terminal/bash",
+                          option3 : "3. for loops",
+                          option4 : "4. console log",
+                          ans : 4
+                          },
+                          {
+                          question: "String values must be enclosed within ______when being assigned to variables:",
+                          option1 : "1. commas",
+                          option2 : "2. curly brackets",
+                          option3 : "3. quotes",
+                          option4 : "4. parentheses",
+                          ans : 3
+                          },
+                          {
+                          question: "Arrays in Javascript can be used to store ______:",
+                          option1 : "1. numbers and strings",
+                          option2 : "2. other arrays",
+                          option3 : "3. booleans",
+                          option4 : "4. all of the above",
+                          ans : 4
+                          }
+                        ];
+      var endQuestion = arrQuestions.length - 1;
+      //var currentQuestion = 0;
+      var currentQuestion;
+      //var correctScore = 0;
+      var correctScore = 0;
+      var timeCount = 0;
+      //var quizTime = 70;
+      var quizTime;
+      var timerInterval;
+
+      function spreadChoices(){
+          var x = arrQuestions[currentQuestion];
+          mainH1.textContent = x.question;
+          btn1Div3.innerText = x.option1;
+          btn2Div3.innerText = x.option2;
+          btn3Div3.innerText = x.option3;
+          btn4Div3.innerText = x.option4;
+      }
+
+      function submitId() {
+        mainContentDiv2a.style.display = "block";
+            mainContentDiv2b.style.display = "block";
+            mainContentDiv3.style.display = "none";
+            mainContentDiv4.style.display = "none";
+            mainH1.style.textAlign = "center";
+            mainH1.textContent = "All done!";
+      }             
+
+      //this function acts as the main function in this program.
+      function checkAnswer(answer){
+              mainContentDiv4.style.display = "block";
+          if (parseInt(answer) == arrQuestions[currentQuestion].ans){
+              mainDiv4Result.innerText = "Correct";
+          }
+          else{
+            mainDiv4Result.innerText = "Incorrect";
+            quizTime = quizTime - 10;
+          }
+          if (currentQuestion < endQuestion){
+            currentQuestion++;
+            spreadChoices();
+          }
+          else {
+           submitId();
+           correctScore = quizTime; //capture the number to be stored here
+           finalScore.textContent = correctScore; //final score should be equal to time elapsed.
+           timeElapsed.textContent = correctScore;
+           clearInterval(timerInterval);
+           
+          }
+      }
+
+      //function that display the timer progress
+      function countProgress() {
+            timeElapsed.textContent = quizTime;
+            quizTime--; 
+      }
+      
+      startQuizButton.addEventListener("click", startQuiz); //event listener for Start Quiz button
+
+      function startQuiz(){
+          currentQuestion = 0;
+          quizTime = 70;
+          mainH1.style.fontSize = "15px";
+          mainH1.style.textAlign = "left"
+          mainContentDiv2.style.display = "none";
+          mainContentDiv2a.style.display = "none";
+          mainContentDiv3a.style.display = "none";
+          mainContentDiv3.style.display = "block";
+          mainContentReset.style.display = "none";
+          spreadChoices();
+          timerInterval = setInterval(countProgress, 1000);
+        }
+
+      //event listener for the submit button
+      buttonSubmit.addEventListener("click", function(event){
+        event.preventDefault();
+        mainH1.textContent = "High Scores";
+        mainContentDiv2a.style.display = "none";
+        mainContentDiv2.style.display = "block";
+        mainContentDiv2b.style.display = "none";
+        var playerDetails = {
+                      nameInitial: initialsEnter.value.trim(),
+                      setScore: correctScore
+                     };
+        localStorage.setItem("user", JSON.stringify(playerDetails));
+
+
+        var lastPlayer = JSON.parse(localStorage.getItem("user"));
+        storageView.textContent = lastPlayer.nameInitial + " " + lastPlayer.setScore;
+
+        mainContentReset.style.display = "block";
+      })
+
+      buttonGoBack.addEventListener("click", startQuiz);
+
+      buttonClearScore.addEventListener("click", function(){
+        mainContentDiv2.style.display = "none";
+      })
+      
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,96 @@
+#header-main {
+    height:100px;
+  }
+  #idHighScore, #idTime {
+    float: left;
+    width: 20%;
+    padding-top: 12px;
+    font-weight: bold;
+  }
+  #idHighScore {
+    float: left;
+  }
+  #idTime {
+    float: right;
+  }
+  #mainTxt{
+    width: auto;
+    margin: auto;
+  }
+  .main-content-div1 {
+    font-size: 20px;
+    border-style: 1px solid cyan;
+    background-color: rgb(247, 243, 243);
+    margin: 5px auto 5px auto;
+    width: 50%;
+  }
+  .main-content-h1, #div-check {
+    font-family:Arial, Helvetica, sans-serif;
+    margin:auto;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  #main-content-div3, #main-content-div3a {
+    width: 50%;
+    margin: auto;
+  }
+  #main-content-div3a{
+    display: block;
+  }
+  #main-content-div3{
+    display: none;
+  }
+  #main-content-div4 {
+    display: none;
+  }
+  #btn-prop, #btn1-div3, #btn2-div3, #btn3-div3, #btn4-div3, #btn-submit, #btn-go-back, #btn-clear-score {
+    margin:0 auto;
+    display: inline; /*to change to display inline for the buttons to align left*/
+    min-width: 100px;
+    height: 20px;
+    font-size: 12px;
+    color: white;
+    background-color: blueviolet;
+    line-height: 1.0; /*assist in vertical centering text in button*/
+    text-align: left;
+  }
+  #btn-prop {
+    display: block;
+    text-align: center;
+  }
+  #btn-go-back, #btn-clear-score{
+    display: inline;
+    text-align: center;
+  }
+  #main-div4-result{
+    margin-top: 5px;
+    text-align: left;
+    font-style: italic;
+    padding-left: 10px;
+  }
+  #main-content-div2, #main-content-div2a, #main-content-div2b, #main-content-div4, #main-content-reset {
+    margin: auto;
+    font: Arial;
+    font-size: 15px;
+    text-align: center;
+    width: 50%;
+    background-color: rgb(247, 243, 243);
+  }
+  #main-content-div2b {
+    width: 75%;
+    display: none;
+  }
+  #final-score {
+    font-weight: bold;
+  }
+  #main-content-div2a {
+    display: none;
+  }
+  #main-content-reset {
+    display: none;
+  }
