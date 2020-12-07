@@ -19,12 +19,12 @@ The rest of the function are either auxiliary functions or smaller functions att
 # Concepts Applied
 
 The following are some of the WEB API ocncepts applied in this application:
-    Node
-    Elements
-    Event Listener
-    Prevent Default
-    Local Storage
-    Query Selector
+    Node,
+    Elements,
+    Event Listener,
+    Prevent Default,
+    Local Storage,
+    Query Selector,
 
 
 # The application could be accessed using the following link:
